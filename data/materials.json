@@ -1,0 +1,24 @@
+[
+  {
+    "judul": "HTML Dasar",
+    "slug": "html-dasar",
+    "kelas": "VIII",
+    "fase": "D",
+    "program": "Jam Tambahan Digital",
+    "kategori": "Web Developer",
+    "deskripsi": "Mengenal struktur dasar HTML dan tag esensial untuk membuat website.",
+    "durasi": "45 menit",
+    "status": "Published"
+  },
+  {
+    "judul": "Algoritma Dasar",
+    "slug": "algoritma-dasar",
+    "kelas": "VII",
+    "fase": "D",
+    "program": "KBC",
+    "kategori": "Informatika",
+    "deskripsi": "Memahami cara berpikir komputasional dan langkah penyelesaian masalah.",
+    "durasi": "45 menit",
+    "status": "Published"
+  }
+]

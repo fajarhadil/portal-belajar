@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jam Tambahan Digital - Web Developer Kelas 8</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 JAM TAMBAHAN DIGITAL</h1>
+            <p>Web Developer Kelas 8 — MTsN 1 Trenggalek</p>
+        </header>
+
+        <section class="card">
+            <h2>Selamat Datang, Calon Web Developer!</h2>
+            <p style="margin: 12px 0 20px 0; color: var(--text-muted);">
+                Portal pembelajaran mandiri interaktif. Belajar HTML, CSS, dan JavaScript secara praktis langsung dari browser atau laptopmu.
+            </p>
+            <a href="mengenal-web/" class="btn">Mulai Pertemuan 1: Mengenal Web</a>
+        </section>
+    </div>
+</body>
+</html>
