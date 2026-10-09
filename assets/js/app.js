@@ -55,3 +55,45 @@ function kembaliKeGate() {
 
 // Jalankan pengambilan data saat web siap
 document.addEventListener("DOMContentLoaded", initData);
+
+// === SISTEM TRACKING PROGRESS SISWA ===
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyn7x7MB9wh2GH0Z2AhrTLD_K7rVRIhZJ8KSY2AJVjCwVFh4i4XwNBy8m6NpT1lxJFQ/exec';
+
+function catatProgress(judulMateri) {
+    const nama = document.getElementById('nama-siswa').value;
+    const kelas = document.getElementById('kelas-siswa').value;
+
+    if(!nama || !kelas) {
+        alert('Mohon isi Nama dan Kelas terlebih dahulu!');
+        return;
+    }
+
+    const btn = document.getElementById('btn-selesai');
+    btn.innerText = 'Mengirim data...';
+    btn.disabled = true;
+
+    // Menggunakan FormData agar terbaca sebagai pengiriman form biasa oleh Google
+    const formData = new FormData();
+    formData.append('nama', nama);
+    formData.append('kelas', kelas);
+    formData.append('materi', judulMateri);
+    formData.append('status', 'Selesai');
+
+    // Mengirim dengan mode 'no-cors' wajib digunakan untuk Apps Script
+    fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors'
+    })
+    .then(() => {
+        alert('Mantap! Progress belajar berhasil dicatat.');
+        btn.innerText = 'Sudah Selesai ✅';
+        btn.style.background = '#10b981';
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Gagal mengirim data. Coba lagi!');
+        btn.innerText = 'Selesai & Catat Progress';
+        btn.disabled = false;
+    });
+}

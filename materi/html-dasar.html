@@ -3,71 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Dasar | Fajar Hadil</title>
+    <title>HTML Dasar - Web Dev</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
     <style>
-        /* CSS sederhana khusus untuk layout materi */
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.6; padding: 20px; max-width: 800px; margin: auto; background: #f4f7f6; color: #333;}
-        .container { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        h1 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .back-link { text-decoration: none; color: #007bff; font-weight: bold; }
-        .section { margin-top: 25px; padding: 15px 20px; border-radius: 8px; }
-        
-        /* Warna latar berdasarkan jenis aktivitas pedagogis */
-        .apersepsi { background: #fff3cd; border-left: 5px solid #ffc107; }
-        .konsep { background: #e8f4f8; border-left: 5px solid #17a2b8; }
-        .praktik { background: #d4edda; border-left: 5px solid #28a745; }
-        .kuis { background: #f8d7da; border-left: 5px solid #dc3545; }
-        
-        .code-block { background: #2d2d2d; color: #f8f8f2; padding: 10px; border-radius: 5px; overflow-x: auto; font-family: monospace; }
-        .btn-finish { display: block; width: 100%; text-align: center; padding: 12px; background: #28a745; color: white; text-decoration: none; border-radius: 5px; margin-top: 30px; cursor: pointer; border: none; font-size: 16px; font-weight: bold; }
-        .btn-finish:hover { background: #218838; }
+        .materi-container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .content-box { background: #1e293b; padding: 30px; border-radius: 12px; border: 1px solid #334155; margin-top: 20px; }
+        code { background: #334155; padding: 2px 6px; border-radius: 4px; color: #38bdf8; }
+        pre { background: #0f172a; padding: 15px; border-radius: 8px; border: 1px solid #475569; overflow-x: auto; color: #10b981; }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <a href="../index.html" class="back-link">← Kembali ke Home</a>
+    <div class="materi-container">
+        <!-- Tombol Kembali -->
+        <button class="back-btn" onclick="window.location.href='../index.html'">← Kembali ke Portal</button>
         
-        <h1>HTML Dasar</h1>
-        <p><strong>Tujuan:</strong> Siswa mampu membuat struktur dasar website menggunakan tag esensial HTML.</p>
+        <!-- Isi Materi -->
+        <div class="content-box">
+            <span class="badge">HTML</span>
+            <h1 style="color: #f8fafc; margin-top: 15px;">HTML Dasar: Kerangka Website</h1>
+            <p style="color: #94a3b8; font-size: 0.9rem;">Kelas: 8 Web Developer</p>
+            
+            <hr style="border-color: #334155; margin: 20px 0;">
+            
+            <div style="line-height: 1.8; color: #e2e8f0;">
+                <h3 style="color: #38bdf8;">1. Apa itu HTML?</h3>
+                <p>HTML (HyperText Markup Language) adalah kerangka dasar dari semua website di internet. Jika website diibaratkan sebagai sebuah rumah, maka HTML adalah tiang, dinding, dan pondasinya.</p>
+                
+                <h3 style="color: #38bdf8; margin-top: 25px;">2. Struktur Dasar HTML</h3>
+                <p>Setiap dokumen web selalu diawali dengan struktur wajib seperti di bawah ini:</p>
+                <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Judul Web&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Halo Dunia!&lt;/h1&gt;
+    &lt;p&gt;Ini adalah website pertamaku.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                </pre>
 
-        <div class="section apersepsi">
-            <h3>1. Apersepsi (5 Menit)</h3>
-            <p>Pernahkah kalian melihat kerangka rumah sebelum temboknya dibangun? HTML adalah "kerangka" dari setiap website yang ada di internet.</p>
-        </div>
-
-        <div class="section konsep">
-            <h3>2. Konsep & Demonstrasi (10 Menit)</h3>
-            <p>HTML menggunakan tanda kurung sudut yang disebut <strong>Tag</strong>. Contohnya:</p>
-            <div class="code-block">
-&lt;h1&gt;Ini Judul Website&lt;/h1&gt;<br>
-&lt;p&gt;Ini adalah paragraf.&lt;/p&gt;
+                <h3 style="color: #38bdf8; margin-top: 25px;">3. Tag Penting yang Sering Dipakai</h3>
+                <ul>
+                    <li><code>&lt;h1&gt;</code> sampai <code>&lt;h6&gt;</code>: Untuk membuat judul (Heading).</li>
+                    <li><code>&lt;p&gt;</code>: Untuk membuat paragraf teks biasa.</li>
+                    <li><code>&lt;a href="..."&gt;</code>: Untuk membuat *link* yang bisa diklik.</li>
+                    <li><code>&lt;img src="..."&gt;</code>: Untuk menampilkan gambar.</li>
+                </ul>
             </div>
         </div>
 
-        <div class="section praktik">
-            <h3>3. Praktik (20 Menit)</h3>
-            <p><strong>💻 Siswa Laptop (VS Code):</strong><br>
-            Buat file <code>index.html</code>. Ketik tanda seru <code>!</code> lalu tekan <strong>Tab</strong>. Tambahkan tag <code>&lt;h1&gt;</code> di dalam tag body. Buka hasilnya dengan Live Server.</p>
+        <!-- Formulir Pencatat Progress -->
+        <div style="background: #0f172a; padding: 25px; border-radius: 12px; border: 1px solid #38bdf8; margin-top: 40px; margin-bottom: 40px;">
+            <h3 style="color: #38bdf8; margin-top: 0; margin-bottom: 20px;">Konfirmasi Selesai Belajar</h3>
+            <input type="text" id="nama-siswa" placeholder="Ketik Nama Lengkap Kamu..." style="width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #475569; background: #1e293b; color: white; box-sizing: border-box;">
             
-            <p><strong>📱 Siswa HP (StackBlitz):</strong><br>
-            Buka browser HP. Tulis kode HTML dasar langsung di editor, dan lihat hasilnya muncul seketika di layar preview.</p>
+            <select id="kelas-siswa" style="width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #475569; background: #1e293b; color: white; box-sizing: border-box;">
+                <option value="">-- Pilih Kelas --</option>
+                <option value="VIII Web Dev">Kelas 8 Web Dev</option>
+            </select>
+            
+            <button id="btn-selesai" onclick="catatProgress('HTML Dasar')" style="width: 100%; padding: 15px; background: #3b82f6; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 1.1rem; cursor: pointer;">Selesai & Catat Progress</button>
         </div>
-
-        <div class="section kuis">
-            <h3>4. Challenge (5 Menit)</h3>
-            <p>Ubah teks "Ini Judul Website" menjadi nama lengkap kalian masing-masing. Jika sudah berhasil, tekan tombol selesai di bawah.</p>
-        </div>
-
-        <!-- Tombol ini nanti akan dihubungkan ke Google Sheets -->
-        <button class="btn-finish" onclick="simpanProgress()">Selesai & Catat Progress</button>
     </div>
 
-    <!-- Script sementara untuk testing tombol -->
-    <script>
-        function simpanProgress() {
-            alert("Mantap! Nanti tombol ini akan mengirim data ke Google Sheets.");
-        }
-    </script>
+    <!-- Panggil app.js -->
+    <script src="../assets/js/app.js"></script>
 </body>
 </html>
