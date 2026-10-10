@@ -10,45 +10,38 @@
         body { background-color: #0f172a; color: #e2e8f0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; }
         .mpi-container { max-width: 950px; margin: 0 auto; padding: 20px; }
         
-        /* Navigasi Tab Horizontal Scrollable untuk HP */
         .tab-nav { display: flex; gap: 10px; overflow-x: auto; margin-bottom: 25px; background: #1e293b; padding: 12px; border-radius: 12px; border: 1px solid #334155; scrollbar-width: none; }
         .tab-nav::-webkit-scrollbar { display: none; }
         .tab-btn { flex: 1; min-width: 140px; padding: 12px 15px; background: #0f172a; color: #94a3b8; border: 1px solid #475569; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; text-align: center; font-size: 0.95rem; white-space: nowrap; }
         .tab-btn.active { background: #3b82f6; color: white; border-color: #3b82f6; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
         .tab-btn:hover:not(.active) { background: #334155; color: white; }
         
-        /* Konten Tab & Animasi */
         .tab-content { display: none; background: #1e293b; padding: 35px; border-radius: 16px; border: 1px solid #334155; animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
         .tab-content.active { display: block; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Komponen Tipografi & Kartu */
         .card { background: #0f172a; border-left: 5px solid #38bdf8; padding: 20px; margin: 20px 0; border-radius: 0 12px 12px 0; }
         .card-alert { border-left-color: #ef4444; background: rgba(239, 68, 68, 0.1); }
         .card-success { border-left-color: #10b981; background: rgba(16, 185, 129, 0.1); }
         .highlight { color: #f472b6; font-family: 'Courier New', Courier, monospace; background: #334155; padding: 3px 8px; border-radius: 6px; font-weight: bold; font-size: 0.95em; }
         .code-block { background: #020617; color: #38bdf8; padding: 15px; border-radius: 8px; font-family: monospace; overflow-x: auto; border: 1px solid #334155; margin: 10px 0; }
         
-        /* Simulasi HP */
         .phone-mockup { width: 300px; height: 500px; border: 12px solid #0f172a; border-radius: 30px; background: white; margin: 0 auto; position: relative; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
         .phone-notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 120px; height: 25px; background: #0f172a; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; z-index: 10; }
         .phone-screen { width: 100%; height: 100%; padding: 40px 15px 15px 15px; box-sizing: border-box; overflow-y: auto; color: #0f172a; font-family: sans-serif; }
         .control-panel { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 20px; }
         
-        /* Tombol Aksi */
         .btn-action { background: #10b981; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1rem; transition: 0.2s; text-align: center; text-decoration: none; display: inline-block; }
         .btn-action:hover { background: #059669; transform: translateY(-2px); }
         .btn-action.secondary { background: #475569; }
         .btn-action.secondary:hover { background: #334155; }
 
-        /* Live Editor Grid */
         .editor-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
         @media (max-width: 768px) { .editor-wrapper { grid-template-columns: 1fr; } }
         .editor-box { display: flex; flex-direction: column; }
-        .editor-box textarea { width: 100%; height: 350px; background: #020617; color: #10b981; border: 1px solid #475569; border-radius: 12px; padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 15px; resize: vertical; box-shadow: inset 0 2px 10px rgba(0,0,0,0.3); box-sizing: border-box; }
-.editor-box iframe { width: 100%; height: 350px; background: #ffffff; border: 1px solid #475569; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); box-sizing: border-box; }
+        .editor-box textarea { width: 100%; height: 450px; background: #020617; color: #10b981; border: 1px solid #475569; border-radius: 12px; padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 14px; resize: vertical; box-shadow: inset 0 2px 10px rgba(0,0,0,0.3); box-sizing: border-box; }
+        .editor-box iframe { width: 100%; height: 450px; background: #ffffff; border: 1px solid #475569; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); box-sizing: border-box; }
 
-        /* Kuis Interaktif */
         .quiz-card { background: #0f172a; padding: 25px; border-radius: 12px; border: 2px solid #334155; margin-bottom: 20px; transition: 0.3s; }
         .quiz-card h4 { margin-top: 0; color: #f8fafc; font-size: 1.1rem; }
         .quiz-badge { font-size: 0.75rem; padding: 4px 10px; border-radius: 20px; background: #1e293b; border: 1px solid #475569; margin-left: 10px; display: inline-block; vertical-align: middle; }
@@ -59,8 +52,11 @@
         .option-label:hover { background: #334155; border-color: #38bdf8; }
         .option-label input { margin-right: 15px; transform: scale(1.2); }
 
-        /* Mode Guru */
         .teacher-mode { background: linear-gradient(145deg, #451a03, #78350f); border: 1px solid #b45309; padding: 20px; border-radius: 12px; margin-bottom: 25px; display: none; color: #fef3c7; }
+        
+        table.demo-table { width: 100%; border-collapse: collapse; margin: 10px 0; color: white; background: #0f172a; }
+        table.demo-table th, table.demo-table td { border: 1px solid #475569; padding: 8px; text-align: left; }
+        table.demo-table th { background: #334155; color: #38bdf8; }
     </style>
 </head>
 <body>
@@ -71,21 +67,21 @@
             <button onclick="toggleTeacherMode()" style="background: transparent; color: #fbbf24; border: 1px dashed #fbbf24; padding: 8px 15px; border-radius: 8px; font-size: 0.9rem; cursor: pointer;">👨‍🏫 Mode Guru</button>
         </div>
 
-        <!-- Panel Mode Guru (Tersembunyi by Default) -->
+        <!-- Panel Mode Guru -->
         <div class="teacher-mode" id="teacher-mode">
             <h3 style="color: #fbbf24; margin-top: 0; display: flex; align-items: center; gap: 10px;"><span>👨‍🏫</span> Catatan Pedagogis untuk Guru</h3>
             <ul style="font-size: 0.95rem; margin-bottom: 0; padding-left: 20px;">
-                <li style="margin-bottom: 8px;"><strong>Fokus CP/TP:</strong> Siswa menguasai struktur dasar dokumen web dan elemen semantik utama (Teks, Gambar, Tautan).</li>
-                <li style="margin-bottom: 8px;"><strong>Aktivitas Kelas:</strong> Gunakan Tab Simulasi di proyektor. Minta siswa menebak apa yang terjadi sebelum tombol diklik.</li>
-                <li><strong>Miskonsepsi Kritis:</strong> Siswa kelas 8 sering lupa menambahkan atribut <code>src</code> pada gambar atau salah mengetik <code>href</code> pada link. Tekankan bahwa tag ini butuh "alamat tujuan".</li>
+                <li style="margin-bottom: 8px;"><strong>Fokus CP/TP:</strong> Siswa menguasai struktur dasar dokumen web, format teks, media (gambar & video), dan tabel dasar.</li>
+                <li style="margin-bottom: 8px;"><strong>Aktivitas Kelas:</strong> Saat Live Coding, bebaskan siswa menyisipkan link video YouTube musik/game favorit mereka agar lebih antusias.</li>
+                <li><strong>Miskonsepsi Kritis:</strong> Jelaskan bedanya tag yang berpasangan (butuh penutup seperti <code>&lt;/p&gt;</code>) dan tag tunggal (tanpa penutup seperti <code>&lt;br&gt;</code>, <code>&lt;hr&gt;</code>, <code>&lt;img&gt;</code>).</li>
             </ul>
         </div>
 
         <!-- Sistem Tab Navigasi -->
         <div class="tab-nav">
             <div class="tab-btn active" onclick="bukaTab(event, 'tab-beranda')">🏠 Beranda</div>
-            <div class="tab-btn" onclick="bukaTab(event, 'tab-teori-1')">📚 1. Anatomi HTML</div>
-            <div class="tab-btn" onclick="bukaTab(event, 'tab-teori-2')">🖼️ 2. Gambar & Link</div>
+            <div class="tab-btn" onclick="bukaTab(event, 'tab-teori-1')">📚 1. Teks & Struktur</div>
+            <div class="tab-btn" onclick="bukaTab(event, 'tab-teori-2')">🖼️ 2. Media & Data</div>
             <div class="tab-btn" onclick="bukaTab(event, 'tab-simulasi')">📱 Simulasi</div>
             <div class="tab-btn" onclick="bukaTab(event, 'tab-coding')">💻 Live Coding</div>
             <div class="tab-btn" onclick="bukaTab(event, 'tab-kuis')">🏆 Misi Akhir</div>
@@ -95,20 +91,20 @@
         <div id="tab-beranda" class="tab-content active">
             <div style="background: linear-gradient(135deg, #1e40af, #3b82f6); padding: 40px 20px; border-radius: 12px; text-align: center; margin-bottom: 30px; box-shadow: inset 0 0 20px rgba(0,0,0,0.2);">
                 <span style="font-size: 4rem; display: block; margin-bottom: 10px;">🌐</span>
-                <h1 style="color: white; font-size: 2.8rem; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">HTML Dasar</h1>
+                <h1 style="color: white; font-size: 2.8rem; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">HTML Dasar (Edisi Lengkap)</h1>
                 <p style="color: #bfdbfe; font-size: 1.2rem; margin-top: 10px;">Kelas 8 | Fase D | Rekayasa Teknologi Web</p>
             </div>
             
             <h3 style="color: #e2e8f0; font-size: 1.5rem;">Selamat Datang di Dunia Web Developer!</h3>
-            <p style="font-size: 1.1rem; color: #94a3b8;">Setiap aplikasi keren seperti TikTok, Instagram, hingga menu di dalam game Mobile Legends dibangun dari sebuah kerangka dasar. Kerangka itu bernama <strong>HTML</strong>. Hari ini, kamu tidak lagi hanya menjadi penikmat internet, tapi kamu akan belajar menjadi <strong>Pencipta</strong>.</p>
+            <p style="font-size: 1.1rem; color: #94a3b8;">Setiap aplikasi keren seperti TikTok, Instagram, hingga web <i>Top Up</i> game ML dibangun dari sebuah kerangka dasar bernama <strong>HTML</strong>. Hari ini, kamu akan belajar menyusun kerangka tersebut, dari teks biasa hingga menyisipkan Video YouTube!</p>
 
             <div class="card card-success">
                 <h3 style="color: #10b981; margin-top: 0;">🎯 Target Keahlianmu Hari Ini:</h3>
                 <ul style="line-height: 1.8; font-size: 1.05rem;">
-                    <li>✅ Memahami anatomi struktur HTML (seperti anatomi tubuh manusia).</li>
-                    <li>✅ Mampu membuat teks dengan ukuran berbeda (Heading & Paragraph).</li>
-                    <li>✅ Mampu memasukkan gambar dan menyambungkan halaman (Hyperlink).</li>
-                    <li>✅ <strong>Final Boss:</strong> Membuat Kartu Profil Digitalmu sendiri!</li>
+                    <li>✅ Memahami anatomi HTML (html, head, body).</li>
+                    <li>✅ Mahir merapikan teks (Tebal, Miring, Garis Bawah, Paragraf).</li>
+                    <li>✅ Mampu memasukkan Gambar, Link, dan Video.</li>
+                    <li>✅ <strong>Final Boss:</strong> Membangun Halaman Profil Digital Komplit di Live Coding!</li>
                 </ul>
             </div>
             
@@ -119,48 +115,48 @@
 
         <!-- TAB 2: TEORI 1 (Anatomi & Teks) -->
         <div id="tab-teori-1" class="tab-content">
-            <h2 style="color: #38bdf8; font-size: 2rem; border-bottom: 2px solid #334155; padding-bottom: 15px;">📚 Bagian 1: Anatomi HTML</h2>
-            <p><strong>HTML (HyperText Markup Language)</strong> adalah bahasa "penanda". Bayangkan HTML seperti robot kosong yang belum dicat. Untuk merakit robot ini, kita membutuhkan bagian tubuh utama.</p>
-
+            <h2 style="color: #38bdf8; font-size: 2rem; border-bottom: 2px solid #334155; padding-bottom: 15px;">📚 Bagian 1: Anatomi & Format Teks</h2>
+            
             <div class="card">
-                <h3 style="color: #38bdf8; margin-top: 0;">🤖 Struktur Manusia HTML</h3>
+                <h3 style="color: #38bdf8; margin-top: 0;">🤖 Struktur "Manusia" HTML</h3>
                 <p>Website yang valid HARUS memiliki 3 bungkus utama ini:</p>
                 <div class="code-block">
 &lt;html&gt;
   &lt;head&gt;
-    &lt;title&gt;Judul di Tab Browser&lt;/title&gt;
+    &lt;title&gt;Nama di Tab Browser&lt;/title&gt;
   &lt;/head&gt;
-  
   &lt;body&gt;
-    Semua yang DILIHAT PENGUNJUNG ditaruh di sini!
+    Semua isi website yang dilihat pengunjung ditaruh di sini!
   &lt;/body&gt;
 &lt;/html&gt;
                 </div>
-                <p style="margin-top: 15px;"><strong>Penjelasan:</strong><br>
-                1. <span class="highlight">&lt;html&gt;</span>: Kulit terluar yang membungkus seluruh tubuh.<br>
-                2. <span class="highlight">&lt;head&gt;</span>: Otak sistem. Berisi hal penting tapi <em>tidak terlihat</em> langsung di layar (seperti nama tab di atas browser).<br>
-                3. <span class="highlight">&lt;body&gt;</span>: Badan utama. Teks, foto, video, dan tombol semuanya WAJIB masuk ke dalam tag body ini.</p>
             </div>
 
-            <h3 style="color: #e2e8f0; margin-top: 40px;">Mengisi Body dengan Teks</h3>
-            <p>Di dalam <code>&lt;body&gt;</code>, kita tidak boleh sembarangan menulis. Kita harus memberi tahu browser, apakah teks itu sebuah "Judul Besar" atau sekadar "Paragraf biasa".</p>
+            <h3 style="color: #e2e8f0; margin-top: 40px;">✏️ Membuat Teks & Dekorasi</h3>
+            <p>Di dalam <code>&lt;body&gt;</code>, kita tidak bisa langsung mengetik seperti di Microsoft Word. Kita butuh "Tag" (Penanda).</p>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                 <div style="background: #0f172a; padding: 20px; border-radius: 12px; border: 1px solid #334155;">
-                    <h4 style="color: #fbbf24; margin-top: 0;">1. Heading (Judul)</h4>
-                    <p>Gunakan tag <code>&lt;h1&gt;</code> sampai <code>&lt;h6&gt;</code>. Angka 1 paling besar, angka 6 paling kecil.</p>
-                    <code class="highlight">&lt;h1&gt;Berita Utama&lt;/h1&gt;</code>
+                    <h4 style="color: #fbbf24; margin-top: 0;">1. Judul & Paragraf</h4>
+                    <p><code>&lt;h1&gt;Judul Terbesar&lt;/h1&gt;</code><br>
+                    <code>&lt;h6&gt;Judul Terkecil&lt;/h6&gt;</code><br>
+                    <code>&lt;p&gt;Untuk paragraf panjang&lt;/p&gt;</code></p>
                 </div>
                 <div style="background: #0f172a; padding: 20px; border-radius: 12px; border: 1px solid #334155;">
-                    <h4 style="color: #10b981; margin-top: 0;">2. Paragraph (Paragraf)</h4>
-                    <p>Digunakan untuk teks panjang atau penjelasan. Gunakan tag <code>&lt;p&gt;</code>.</p>
-                    <code class="highlight">&lt;p&gt;Ini teks panjang...&lt;/p&gt;</code>
+                    <h4 style="color: #10b981; margin-top: 0;">2. Format Teks (Dekorasi)</h4>
+                    <p><code>&lt;b&gt;<b>Teks Tebal (Bold)</b>&lt;/b&gt;</code><br>
+                    <code>&lt;i&gt;<i>Teks Miring (Italic)</i>&lt;/i&gt;</code><br>
+                    <code>&lt;u&gt;<u>Garis Bawah (Underline)</u>&lt;/u&gt;</code></p>
                 </div>
             </div>
 
-            <div class="card card-alert" style="margin-top: 30px;">
-                <h4 style="color: #ef4444; margin-top: 0;">⚠️ Aturan Emas Web Developer</h4>
-                <p>Setiap kali membuka tag, kamu <strong>wajib</strong> menutupnya dengan tanda garis miring (slash <code>/</code>). Jika kamu mengetik <code>&lt;h1&gt;</code>, maka di akhir kalimat harus ditutup dengan <code>&lt;/h1&gt;</code>. Jika lupa, seluruh tampilan websitemu bisa hancur berantakan!</p>
+            <div class="card" style="border-color: #a855f7; margin-top: 20px;">
+                <h4 style="color: #a855f7; margin-top: 0;">✂️ Tag Spasi & Garis (Tag Jomblo)</h4>
+                <p>Sebagian besar tag harus ditutup pakai <code>/</code>, tapi ada tag unik yang berdiri sendiri (tidak butuh penutup):</p>
+                <ul>
+                    <li><code>&lt;br&gt;</code> (Break): Untuk pindah baris (seperti tombol <i>Enter</i>).</li>
+                    <li><code>&lt;hr&gt;</code> (Horizontal Rule): Untuk membuat garis lurus pembatas.</li>
+                </ul>
             </div>
             
             <div style="display: flex; justify-content: space-between; margin-top: 40px;">
@@ -171,35 +167,51 @@
 
         <!-- TAB 3: TEORI 2 (Media Lanjutan) -->
         <div id="tab-teori-2" class="tab-content">
-            <h2 style="color: #38bdf8; font-size: 2rem; border-bottom: 2px solid #334155; padding-bottom: 15px;">🖼️ Bagian 2: Memasukkan Gambar & Link</h2>
-            <p>Website yang isinya cuma teks pasti membosankan. Mari pelajari cara memasukkan gambar dan membuat tombol yang bisa diklik (Hyperlink).</p>
-
-            <div class="card" style="border-color: #a855f7;">
-                <h3 style="color: #a855f7; margin-top: 0;">📸 Menampilkan Gambar (Tag img)</h3>
-                <p>Tag gambar sangat spesial karena dia <strong>tidak butuh tag penutup</strong>. Namun, dia wajib memiliki "atribut" bernama <code>src</code> (source/sumber) agar browser tahu gambar mana yang harus dimuat.</p>
-                <div class="code-block">
-&lt;img src="link-gambar.jpg" width="300"&gt;
-                </div>
-                <p style="font-size: 0.9rem; margin-top: 10px; color: #94a3b8;">*Atribut <code>width</code> opsional, digunakan untuk mengatur lebar gambar.</p>
-            </div>
-
-            <div class="card" style="border-color: #3b82f6;">
-                <h3 style="color: #3b82f6; margin-top: 0;">🔗 Membuat Tautan (Tag a / Anchor)</h3>
-                <p>Ingin teks atau tulisanmu bisa diklik dan pindah ke halaman lain (seperti pindah ke YouTube)? Gunakan tag <code>&lt;a&gt;</code> dengan atribut <code>href</code> (hypertext reference).</p>
-                <div class="code-block">
-&lt;a href="https://youtube.com"&gt;Klik untuk Buka YouTube&lt;/a&gt;
-                </div>
-            </div>
-
+            <h2 style="color: #38bdf8; font-size: 2rem; border-bottom: 2px solid #334155; padding-bottom: 15px;">🖼️ Bagian 2: Gambar, Video, & Tabel</h2>
+            
             <div class="card" style="border-color: #f59e0b;">
-                <h3 style="color: #f59e0b; margin-top: 0;">📋 Membuat Daftar Barang (List)</h3>
-                <p>Untuk membuat urutan seperti "Top 3 Game Favorit", kita gunakan perpaduan tag <code>&lt;ul&gt;</code> (Unordered List - tanpa angka) atau <code>&lt;ol&gt;</code> (Ordered List - pakai angka), yang di dalamnya diisi dengan <code>&lt;li&gt;</code> (List Item).</p>
+                <h3 style="color: #f59e0b; margin-top: 0;">🔗 Link & Gambar</h3>
+                <p><strong>Link:</strong> Menggunakan tag <code>&lt;a href="..."&gt;</code> (Anchor).</p>
+                <p><strong>Gambar:</strong> Menggunakan tag <code>&lt;img src="..."&gt;</code> (Tanpa penutup).</p>
                 <div class="code-block">
-&lt;ol&gt;
-  &lt;li&gt;Mobile Legends&lt;/li&gt;
-  &lt;li&gt;Valorant&lt;/li&gt;
-  &lt;li&gt;Minecraft&lt;/li&gt;
-&lt;/ol&gt;
+&lt;a href="https://google.com"&gt;Buka Google&lt;/a&gt;
+&lt;img src="foto-kucing.jpg" width="200"&gt;
+                </div>
+            </div>
+
+            <div class="card" style="border-color: #ef4444;">
+                <h3 style="color: #ef4444; margin-top: 0;">▶️ Menyisipkan Video YouTube</h3>
+                <p>Mau menampilkan video di webmu? Sangat mudah! Gunakan tag <code>&lt;iframe&gt;</code>. Kamu bisa mendapatkan kodenya dengan klik "Bagikan" -> "Sematkan" (Embed) di YouTube.</p>
+                <div class="code-block">
+&lt;iframe width="300" height="200" src="https://www.youtube.com/embed/XXXXXX"&gt;&lt;/iframe&gt;
+                </div>
+            </div>
+
+            <div class="card" style="border-color: #10b981;">
+                <h3 style="color: #10b981; margin-top: 0;">📊 Membuat Tabel Data</h3>
+                <p>Tabel sangat penting untuk menyusun data jadwal pelajaran atau skor game. Butuh 3 tag untuk membuatnya:</p>
+                <ul>
+                    <li><code>&lt;table&gt;</code> : Kotak utama pembungkus tabel.</li>
+                    <li><code>&lt;tr&gt;</code> (Table Row) : Membuat Baris (mendatar).</li>
+                    <li><code>&lt;td&gt;</code> (Table Data) : Membuat Kolom (kotak isi data).</li>
+                </ul>
+                <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center; margin-top: 15px; background: #0f172a; padding: 15px; border-radius: 8px;">
+                    <div style="flex: 1; min-width: 200px;">
+<pre style="color: #38bdf8; margin: 0; font-family: monospace;">
+&lt;table border="1"&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Nama&lt;/td&gt;
+    &lt;td&gt;Kelas&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+</pre>
+                    </div>
+                    <div style="flex: 1; min-width: 200px;">
+                        <span style="color: #94a3b8; font-size: 0.9rem;">Hasilnya:</span>
+                        <table class="demo-table">
+                            <tr><td>Nama</td><td>Kelas</td></tr>
+                        </table>
+                    </div>
                 </div>
             </div>
             
@@ -214,7 +226,6 @@
             <h2 style="text-align: center; color: #38bdf8; margin-bottom: 5px;">📱 Simulasi DOM HTML</h2>
             <p style="text-align: center; color: #94a3b8; margin-bottom: 30px;">Berperanlah sebagai Browser. Suntikkan elemen HTML ke dalam layar HP di bawah ini dengan mengeklik tombol yang tersedia.</p>
             
-            <!-- Mockup HP -->
             <div class="phone-mockup">
                 <div class="phone-notch"></div>
                 <div class="phone-screen" id="sim-screen">
@@ -224,53 +235,55 @@
                 </div>
             </div>
 
-            <!-- Panel Kontrol Simulasi -->
             <div class="control-panel">
-                <button class="btn-action" style="background: #3b82f6;" onclick="injectElement('h1')">+ Tambah &lt;h1&gt;</button>
-                <button class="btn-action" style="background: #10b981;" onclick="injectElement('p')">+ Tambah &lt;p&gt;</button>
-                <button class="btn-action" style="background: #a855f7;" onclick="injectElement('img')">+ Tambah &lt;img&gt;</button>
-                <button class="btn-action" style="background: #f59e0b;" onclick="injectElement('a')">+ Tambah &lt;a&gt;</button>
+                <button class="btn-action" style="background: #3b82f6;" onclick="injectElement('h1')">+ &lt;h1&gt; Judul</button>
+                <button class="btn-action" style="background: #10b981;" onclick="injectElement('p')">+ &lt;p&gt; Teks Biasa</button>
+                <button class="btn-action" style="background: #8b5cf6;" onclick="injectElement('b')">+ &lt;b&gt; Teks Tebal</button>
+                <button class="btn-action" style="background: #f59e0b;" onclick="injectElement('img')">+ &lt;img&gt; Gambar</button>
+                <button class="btn-action" style="background: #ec4899;" onclick="injectElement('hr')">+ &lt;hr&gt; Garis</button>
                 <button class="btn-action" style="background: #ef4444; grid-column: 1 / -1;" onclick="injectElement('clear')">🗑️ Bersihkan Layar</button>
             </div>
 
             <div style="display: flex; justify-content: space-between; margin-top: 50px;">
                 <button onclick="bukaTab(null, 'tab-teori-2')" class="btn-action secondary">← Kembali</button>
-                <button onclick="bukaTab(null, 'tab-coding')" class="btn-action">Lanjut Uji Praktek →</button>
+                <button onclick="bukaTab(null, 'tab-coding')" class="btn-action">Lanjut Uji Praktek 💻 →</button>
             </div>
         </div>
 
         <!-- TAB 5: LIVE CODING -->
         <div id="tab-coding" class="tab-content">
-            <h2 style="color: #38bdf8; border-bottom: 2px solid #334155; padding-bottom: 10px;">💻 Misi Akhir: Kartu Profil Digital</h2>
-            <p>Kerangka website di bawah ini masih berantakan dan ada kode yang hilang. <strong>Tugasmu:</strong></p>
-            <ul style="color: #94a3b8; font-size: 0.95rem;">
-                <li>Ubah teks <code>NAMA_KAMU_DISINI</code> menjadi nama aslimu.</li>
-                <li>Hapus tanda komentar <code>&lt;!-- --&gt;</code> dan perbaiki tag gambar yang hilang atribut <code>src</code>-nya.</li>
-                <li>Tambahkan satu hobi baru di dalam urutan List <code>&lt;li&gt;</code>.</li>
-            </ul>
+            <h2 style="color: #38bdf8; border-bottom: 2px solid #334155; padding-bottom: 10px;">💻 Misi Praktek: Halaman Web Komplit</h2>
+            <p>Di bawah ini ada kode *blueprint* yang belum selesai. Selesaikan 4 misi di dalam kode editor (sebelah kiri) agar tampilan *browser* (sebelah kanan) menjadi rapi dan menarik!</p>
             
             <div class="editor-wrapper">
                 <div class="editor-box">
-                    <label style="margin-bottom: 8px; color: #f472b6; font-weight: bold; font-family: monospace;">index.html</label>
+                    <label style="margin-bottom: 8px; color: #f472b6; font-weight: bold; font-family: monospace;">index.html (Ketik kodemu di sini)</label>
                     <textarea id="html-editor" onkeyup="updateLivePreview()" spellcheck="false">
-<h1>Profil NAMA_KAMU_DISINI</h1>
+<h1>Selamat Datang di Web NAMA_KAMU</h1>
 
-<p>Halo! Saya adalah siswa MTsN 1 Trenggalek yang sedang belajar menjadi Fullstack Developer.</p>
+<!-- MISI 1: Tebalkan kata "Web Developer" di bawah ini menggunakan tag <b> -->
+<p>Halo, saya adalah siswa MTsN 1 Trenggalek yang bercita-cita menjadi Web Developer.</p>
 
-<!-- TUGAS 1: Tambahkan link gambar di dalam tanda kutip src="" di bawah ini -->
-<!-- Gunakan link ini: https://ui-avatars.com/api/?name=Hacker&background=random -->
-<img src="" width="120">
+<hr>
 
-<h3>Skill & Hobi Saya:</h3>
+<!-- MISI 2: Tambahkan link gambar ke dalam atribut src="" di bawah ini -->
+<!-- Link bantuan: https://ui-avatars.com/api/?name=Hacker&background=random -->
+<img src="" width="150">
+
+<h3>Game & Hobi Favorit:</h3>
 <ul>
-  <li>Main Mobile Legends</li>
-  <li>Belajar Koding HTML</li>
-  <!-- TUGAS 2: Tambahkan 1 tag <li> lagi di bawah tulisan ini -->
+  <li>Bermain Coding</li>
+  <!-- MISI 3: Tambahkan 1 hobi lagi di bawah ini pakai tag <li> -->
   
 </ul>
 
-<!-- TUGAS 3: Lengkapi tag penutup dari tautan di bawah ini -->
-<a href="https://google.com">Cari Jawaban di Google</a
+<h3>Data Diri (Tabel)</h3>
+<!-- MISI 4: Lengkapi tag penutup tabel </table> dan baris </tr> di bawah -->
+<table border="1">
+  <tr>
+    <td>Kelas</td>
+    <td>8 Web Dev</td>
+  
                     </textarea>
                 </div>
                 
@@ -282,51 +295,46 @@
 
             <div style="display: flex; justify-content: space-between; margin-top: 40px;">
                 <button onclick="bukaTab(null, 'tab-simulasi')" class="btn-action secondary">← Kembali</button>
-                <button onclick="bukaTab(null, 'tab-kuis')" class="btn-action" style="background: #f59e0b;">Selesai Praktek, Lanjut Ujian! →</button>
+                <button onclick="bukaTab(null, 'tab-kuis')" class="btn-action" style="background: #f59e0b;">Selesai Praktek, Tantang Ujian! 🏆</button>
             </div>
         </div>
 
         <!-- TAB 6: KUIS & REFLEKSI (INTEGRASI GOOGLE SHEETS) -->
         <div id="tab-kuis" class="tab-content">
             <h2 style="color: #f59e0b; text-align: center; font-size: 2.2rem; margin-bottom: 5px;">🏆 Final Boss: Ujian Konsep</h2>
-            <p style="text-align: center; color: #94a3b8; margin-bottom: 30px;">Selesaikan 4 pertanyaan ini untuk membuktikan pemahamanmu. Jawabanmu akan langsung dinilai oleh sistem.</p>
+            <p style="text-align: center; color: #94a3b8; margin-bottom: 30px;">Selesaikan 4 pertanyaan ini untuk membuktikan pemahamanmu. Jawabanmu akan langsung dinilai oleh sistem Pak Fajar.</p>
 
             <div id="quiz-container">
-                <!-- Pertanyaan 1 -->
                 <div class="quiz-card" id="q1-box">
-                    <h4>1. Mengapa isi teks paragraf kita tidak boleh diletakkan di dalam tag <code>&lt;head&gt;</code>? <span class="quiz-badge level-1">Pemahaman</span></h4>
-                    <label class="option-label"><input type="radio" name="q1" value="a"> Karena head hanya untuk gambar.</label>
-                    <label class="option-label"><input type="radio" name="q1" value="b"> Karena apapun yang ada di dalam head tidak akan terlihat di layar halaman web utama.</label>
-                    <label class="option-label"><input type="radio" name="q1" value="c"> Karena head menyebabkan error pada server.</label>
+                    <h4>1. Tag manakah yang digunakan untuk membuat sebuah teks menjadi <b>Tebal</b> dan <i>Miring</i> secara berurutan? <span class="quiz-badge level-1">Pemahaman</span></h4>
+                    <label class="option-label"><input type="radio" name="q1" value="a"> &lt;b&gt; dan &lt;i&gt;</label>
+                    <label class="option-label"><input type="radio" name="q1" value="b"> &lt;u&gt; dan &lt;h1&gt;</label>
+                    <label class="option-label"><input type="radio" name="q1" value="c"> &lt;br&gt; dan &lt;hr&gt;</label>
                 </div>
 
-                <!-- Pertanyaan 2 -->
                 <div class="quiz-card" id="q2-box">
-                    <h4>2. Tag HTML yang paling tepat untuk membuat "Judul Berita" paling besar adalah... <span class="quiz-badge level-1">Pemahaman</span></h4>
-                    <label class="option-label"><input type="radio" name="q2" value="a"> &lt;title&gt;</label>
-                    <label class="option-label"><input type="radio" name="q2" value="b"> &lt;p&gt;</label>
-                    <label class="option-label"><input type="radio" name="q2" value="c"> &lt;h1&gt;</label>
+                    <h4>2. Tag yang tidak memerlukan pasangan penutup (Tag Jomblo) dari pilihan di bawah ini adalah... <span class="quiz-badge level-1">Pemahaman</span></h4>
+                    <label class="option-label"><input type="radio" name="q2" value="a"> &lt;table&gt;</label>
+                    <label class="option-label"><input type="radio" name="q2" value="b"> &lt;img&gt; dan &lt;br&gt;</label>
+                    <label class="option-label"><input type="radio" name="q2" value="c"> &lt;h1&gt; dan &lt;p&gt;</label>
                 </div>
 
-                <!-- Pertanyaan 3 -->
                 <div class="quiz-card" id="q3-box">
-                    <h4>3. Cermati kode ini: <code>&lt;img src="logo.png"&gt;</code>. Apa fungsi dari "src" pada kode tersebut? <span class="quiz-badge level-2">Analisis</span></h4>
-                    <label class="option-label"><input type="radio" name="q3" value="a"> Menunjukkan sumber atau alamat file gambar yang harus dimuat.</label>
-                    <label class="option-label"><input type="radio" name="q3" value="b"> Membuat gambar menjadi bentuk lingkaran.</label>
-                    <label class="option-label"><input type="radio" name="q3" value="c"> Menutup tag gambar agar tidak error.</label>
+                    <h4>3. Pada tag <code>&lt;a href="situs.com"&gt;</code>, fungsi dari atribut "href" adalah... <span class="quiz-badge level-2">Analisis</span></h4>
+                    <label class="option-label"><input type="radio" name="q3" value="a"> Mengubah warna teks menjadi biru.</label>
+                    <label class="option-label"><input type="radio" name="q3" value="b"> Menentukan alamat URL tujuan saat teks tersebut diklik.</label>
+                    <label class="option-label"><input type="radio" name="q3" value="c"> Menyembunyikan teks agar tidak terlihat.</label>
                 </div>
 
-                <!-- Pertanyaan 4 -->
                 <div class="quiz-card" id="q4-box">
-                    <h4>4. Kamu disuruh membuat menu navigasi berupa daftar 3 buah link (Beranda, Profil, Kontak). Pasangan tag apa yang paling efisien digunakan bersamaan? <span class="quiz-badge level-3">HOTS / Penerapan</span></h4>
-                    <label class="option-label"><input type="radio" name="q4" value="a"> &lt;h1&gt; digabung dengan &lt;p&gt;</label>
-                    <label class="option-label"><input type="radio" name="q4" value="b"> &lt;ul&gt; digabung dengan &lt;li&gt; dan &lt;a&gt;</label>
-                    <label class="option-label"><input type="radio" name="q4" value="c"> &lt;body&gt; digabung dengan &lt;img&gt;</label>
+                    <h4>4. Jika kamu ingin membuat data jadwal piket harian yang rapi dengan baris dan kolom, tag utama apa saja yang kamu perlukan? <span class="quiz-badge level-3">HOTS / Penerapan</span></h4>
+                    <label class="option-label"><input type="radio" name="q4" value="a"> &lt;ul&gt; dan &lt;li&gt;</label>
+                    <label class="option-label"><input type="radio" name="q4" value="b"> &lt;img&gt; dan &lt;iframe&gt;</label>
+                    <label class="option-label"><input type="radio" name="q4" value="c"> &lt;table&gt;, &lt;tr&gt;, dan &lt;td&gt;</label>
                 </div>
 
                 <button onclick="prosesKuisLengkap()" class="btn-action" style="width: 100%; padding: 18px; font-size: 1.2rem; background: #3b82f6; margin-bottom: 25px;">Terkam Nilai Kuis 🚀</button>
                 
-                <!-- Hasil Kuis -->
                 <div id="hasil-box" style="display: none; background: #020617; padding: 30px; border-radius: 12px; border: 2px solid #38bdf8; text-align: center; margin-bottom: 40px; animation: slideUp 0.5s;">
                     <h2 id="teks-skor" style="font-size: 3rem; margin: 0; color: #10b981;">100</h2>
                     <p id="teks-evaluasi" style="font-size: 1.2rem; color: #fbbf24; margin-top: 10px; font-weight: bold;"></p>
@@ -354,33 +362,28 @@
                 <label style="display: block; color: #38bdf8; margin-bottom: 10px; font-weight: bold;">Bagaimana tingkat kesulitan materi HTML Dasar ini menurutmu?</label>
                 <select id="refleksi-siswa" style="width: 100%; padding: 15px; margin-bottom: 25px; border-radius: 8px; border: 1px solid #475569; background: #0f172a; color: white; box-sizing: border-box; font-size: 1rem;">
                     <option value="">-- Pilih Kejujuran Hatimu --</option>
-                    <option value="Sangat Paham">😁 Sangat Mudah! Logikanya bisa diterima.</option>
-                    <option value="Cukup Paham">🤔 Lumayan, tapi kadang masih lupa ketik tag penutup.</option>
-                    <option value="Masih Bingung">😵 Otakku nge-hang, butuh penjelasan langsung di kelas.</option>
+                    <option value="Sangat Paham">😁 Seru banget! Aku udah bisa bikin tabel & nyisipin video.</option>
+                    <option value="Cukup Paham">🤔 Lumayan paham, tapi butuh latihan bikin tabel lagi.</option>
+                    <option value="Masih Bingung">😵 Otakku nge-hang, kebanyakan kode. Pak Guru tolong bantu.</option>
                 </select>
                 
-                <button id="btn-selesai" onclick="kirimDatabaseAkhir()" class="btn-action" style="width: 100%; padding: 20px; font-size: 1.2rem; background: linear-gradient(135deg, #10b981, #059669); text-transform: uppercase; letter-spacing: 1px;">Kirim Data ke Server 📡</button>
+                <button id="btn-selesai" onclick="kirimDatabaseAkhir()" class="btn-action" style="width: 100%; padding: 20px; font-size: 1.2rem; background: linear-gradient(135deg, #10b981, #059669); text-transform: uppercase; letter-spacing: 1px;">Kirim Data ke Server Pak Fajar 📡</button>
             </div>
         </div>
     </div>
 
-    <!-- Panggil Logika Utama dari assets -->
     <script src="../assets/js/app.js"></script>
 
-    <!-- Script Internal Interaktivitas MPI -->
     <script>
-        // 1. Sistem Tab Navigasi Dinamis
         function bukaTab(evt, tabId) {
             const contents = document.getElementsByClassName("tab-content");
             for (let i = 0; i < contents.length; i++) contents[i].classList.remove("active");
-            
             const btns = document.getElementsByClassName("tab-btn");
             for (let i = 0; i < btns.length; i++) btns[i].classList.remove("active");
             
             document.getElementById(tabId).classList.add("active");
             if(evt) { 
                 evt.currentTarget.classList.add("active"); 
-                // Auto scroll tab nav ke elemen aktif di HP
                 evt.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
             } else {
                 for(let i=0; i<btns.length; i++){
@@ -393,54 +396,46 @@
             }
         }
 
-        // 2. Togel Mode Guru
         function toggleTeacherMode() {
             const tm = document.getElementById('teacher-mode');
             tm.style.display = (tm.style.display === 'none' || tm.style.display === '') ? 'block' : 'none';
         }
 
-        // 3. Simulasi Injeksi DOM HP
         const simScreen = document.getElementById('sim-screen');
         let simCount = 0;
         function injectElement(type) {
-            if (simCount === 0) simScreen.innerHTML = ''; // Bersihkan teks bantuan awal
-            
+            if (simCount === 0) simScreen.innerHTML = ''; 
             let elHTML = '';
-            if (type === 'h1') elHTML = '<h1 style="font-size:24px; color:#1e293b; margin-top:0;">Judul Aplikasi</h1>';
-            else if (type === 'p') elHTML = '<p style="font-size:14px; color:#475569;">Ini adalah teks paragraf yang menjelaskan isi dari konten yang ada di layar smartphone.</p>';
-            else if (type === 'img') elHTML = '<div style="width:100%; height:120px; background:#e2e8f0; border-radius:8px; display:flex; align-items:center; justify-content:center; margin:10px 0; border:2px dashed #94a3b8; color:#64748b; font-weight:bold;">[Area Gambar Dimuat]</div>';
-            else if (type === 'a') elHTML = '<a href="#" style="display:block; padding:12px; background:#3b82f6; color:white; text-align:center; border-radius:6px; text-decoration:none; margin-top:10px; font-weight:bold;">Tombol Link Aksi</a>';
+            if (type === 'h1') elHTML = '<h1 style="font-size:20px; color:#1e293b; margin-bottom:5px;">Ini Judul</h1>';
+            else if (type === 'p') elHTML = '<p style="font-size:14px; color:#475569; margin-top:0;">Ini adalah paragraf penjelas.</p>';
+            else if (type === 'b') elHTML = '<div style="margin-bottom:10px;">Ini teks biasa, dan <b>Ini Teks Tebal</b></div>';
+            else if (type === 'hr') elHTML = '<hr style="border: 1px solid #cbd5e1; width: 100%; margin: 15px 0;">';
+            else if (type === 'img') elHTML = '<div style="width:100%; height:100px; background:#e2e8f0; border-radius:8px; display:flex; align-items:center; justify-content:center; margin:10px 0; color:#64748b; font-size:12px;">[Gambar Termuat]</div>';
             else if (type === 'clear') {
                 simScreen.innerHTML = '<div style="height: 100%; display: flex; align-items: center; justify-content: center; color: #cbd5e1; text-align: center; font-style: italic;">Layar dibersihkan.<br>Mulai dari awal.</div>';
                 simCount = 0;
                 return;
             }
-
             simScreen.insertAdjacentHTML('beforeend', elHTML);
             simCount++;
-            simScreen.scrollTop = simScreen.scrollHeight; // Auto scroll kebawah
+            simScreen.scrollTop = simScreen.scrollHeight; 
         }
 
-        // 4. Live Coding Editor Parser
         function updateLivePreview() {
             const code = document.getElementById('html-editor').value;
             const iframe = document.getElementById('live-preview');
-            // Bungkus kode dengan sedikit styling dasar agar hasil preview lebih rapi
             const wrapper = `
                 <style>
-                    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif; padding: 15px; color: #333; }
-                    h1 { color: #2563eb; }
-                    img { border-radius: 50%; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-                    a { color: #10b981; text-decoration: none; font-weight: bold; }
-                    a:hover { text-decoration: underline; }
+                    body { font-family: sans-serif; padding: 15px; color: #333; }
+                    table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+                    th, td { padding: 8px; text-align: left; }
                 </style>
                 ${code}
             `;
             iframe.srcdoc = wrapper;
         }
-        updateLivePreview(); // Render saat pertama load
+        updateLivePreview(); 
 
-        // 5. Mesin Kuis & Evaluasi Lengkap
         let nilaiAkhirMpi = 0;
         let kuisTelahDikerjakan = false;
 
@@ -456,26 +451,24 @@
                 return;
             }
 
-            // Kunci Jawaban (Masing-masing 25 Poin)
-            // Q1: b, Q2: c, Q3: a, Q4: b
+            // Kunci Jawaban: 1(a), 2(b), 3(b), 4(c)
             const boxes = ['q1-box', 'q2-box', 'q3-box', 'q4-box'];
             
-            if(q1.value === 'b') { skor += 25; document.getElementById(boxes[0]).style.borderColor = '#10b981'; } 
+            if(q1.value === 'a') { skor += 25; document.getElementById(boxes[0]).style.borderColor = '#10b981'; } 
             else { document.getElementById(boxes[0]).style.borderColor = '#ef4444'; }
 
-            if(q2.value === 'c') { skor += 25; document.getElementById(boxes[1]).style.borderColor = '#10b981'; } 
+            if(q2.value === 'b') { skor += 25; document.getElementById(boxes[1]).style.borderColor = '#10b981'; } 
             else { document.getElementById(boxes[1]).style.borderColor = '#ef4444'; }
 
-            if(q3.value === 'a') { skor += 25; document.getElementById(boxes[2]).style.borderColor = '#10b981'; } 
+            if(q3.value === 'b') { skor += 25; document.getElementById(boxes[2]).style.borderColor = '#10b981'; } 
             else { document.getElementById(boxes[2]).style.borderColor = '#ef4444'; }
 
-            if(q4.value === 'b') { skor += 25; document.getElementById(boxes[3]).style.borderColor = '#10b981'; } 
+            if(q4.value === 'c') { skor += 25; document.getElementById(boxes[3]).style.borderColor = '#10b981'; } 
             else { document.getElementById(boxes[3]).style.borderColor = '#ef4444'; }
 
             nilaiAkhirMpi = skor;
             kuisTelahDikerjakan = true;
 
-            // Tampilkan UI Hasil
             const hasilBox = document.getElementById('hasil-box');
             const teksSkor = document.getElementById('teks-skor');
             const teksEval = document.getElementById('teks-evaluasi');
@@ -483,7 +476,6 @@
             hasilBox.style.display = 'block';
             teksSkor.innerText = skor;
 
-            // Logika Feedback Dinamis
             if(skor === 100) {
                 teksSkor.style.color = '#10b981';
                 teksEval.innerText = "🌟 Master Developer! Logika HTML-mu tanpa cacat.";
@@ -492,14 +484,13 @@
                 teksEval.innerText = "👍 Sangat Baik! Sedikit lagi mencapai tingkat sempurna.";
             } else if (skor >= 50) {
                 teksSkor.style.color = '#f97316';
-                teksEval.innerText = "📚 Cukup Baik. Coba baca ulang fungsi atribut pada gambar dan link.";
+                teksEval.innerText = "📚 Cukup Baik. Jangan lupa bedakan atribut src dan href ya.";
             } else {
                 teksSkor.style.color = '#ef4444';
                 teksEval.innerText = "💪 Jangan menyerah! Koding memang butuh pembiasaan. Ulangi pelan-pelan ya.";
             }
         }
 
-// 6. Router Pengiriman Data ke Google Sheets (app.js)
         function kirimDatabaseAkhir() {
             if(!kuisTelahDikerjakan) {
                 alert('Tolong kerjakan kuisnya dulu agar ada nilai yang bisa dikirim ke server!');
@@ -512,9 +503,8 @@
                 return;
             }
 
-            // Memanggil fungsi pengirim ganda dari app.js
-            // Arg 1: Judul Materi | Arg 2: Angka Nilai | Arg 3: Teks Refleksi
-            kirimDataGanda('HTML Dasar', nilaiAkhirMpi, refleksi);
+            // Memanggil API pengirim (app.js)
+            kirimDataGanda('HTML Dasar (Supercharge)', nilaiAkhirMpi, refleksi);
         }
     </script>
 </body>
