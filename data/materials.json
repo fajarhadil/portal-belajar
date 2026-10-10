@@ -20,5 +20,17 @@
     "deskripsi": "Memahami cara berpikir komputasional dan langkah penyelesaian masalah.",
     "durasi": "45 menit",
     "status": "Published"
+  },
+  {
+    "judul": "VLOOKUP & HLOOKUP",
+    "slug": "spreadsheet-lookup",
+    "kelas": "VIII",
+    "fase": "D",
+    "program": "Informatika",
+    "kategori": "Informatika",
+    "deskripsi": "Memahami cara berpikir komputasional dan langkah penyelesaian masalah.",
+    "durasi": "45 menit",
+    "status": "Published"
   }
+  
 ]

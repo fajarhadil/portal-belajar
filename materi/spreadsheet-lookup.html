@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis Data - MPI Informatika</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <style>
+        /* === DESAIN APLIKASI MPI MODERN === */
+        body { background-color: #0f172a; color: #e2e8f0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; }
+        .mpi-container { max-width: 950px; margin: 0 auto; padding: 20px; }
+        
+        .tab-nav { display: flex; gap: 10px; overflow-x: auto; margin-bottom: 25px; background: #1e293b; padding: 12px; border-radius: 12px; border: 1px solid #334155; scrollbar-width: none; }
+        .tab-nav::-webkit-scrollbar { display: none; }
+        .tab-btn { flex: 1; min-width: 140px; padding: 12px 15px; background: #0f172a; color: #94a3b8; border: 1px solid #475569; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; text-align: center; font-size: 0.95rem; white-space: nowrap; }
+        .tab-btn.active { background: #3b82f6; color: white; border-color: #3b82f6; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
+        .tab-btn:hover:not(.active) { background: #334155; color: white; }
+        
+        .tab-content { display: none; background: #1e293b; padding: 35px; border-radius: 16px; border: 1px solid #334155; animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .tab-content.active { display: block; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .card { background: #0f172a; border-left: 5px solid #38bdf8; padding: 20px; margin: 20px 0; border-radius: 0 12px 12px 0; }
+        .card-alert { border-left-color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+        .card-success { border-left-color: #10b981; background: rgba(16, 185, 129, 0.1); }
+        .highlight { color: #f472b6; font-family: 'Courier New', Courier, monospace; background: #334155; padding: 3px 8px; border-radius: 6px; font-weight: bold; font-size: 0.95em; }
+        
+        .btn-action { background: #10b981; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1rem; transition: 0.2s; text-align: center; text-decoration: none; display: inline-block; }
+        .btn-action:hover { background: #059669; transform: translateY(-2px); }
+        .btn-action.secondary { background: #475569; }
+        .btn-action.secondary:hover { background: #334155; }
+
+        .quiz-card { background: #0f172a; padding: 25px; border-radius: 12px; border: 2px solid #334155; margin-bottom: 20px; transition: 0.3s; }
+        .quiz-card h4 { margin-top: 0; color: #f8fafc; font-size: 1.1rem; }
+        .quiz-badge { font-size: 0.75rem; padding: 4px 10px; border-radius: 20px; background: #1e293b; border: 1px solid #475569; margin-left: 10px; display: inline-block; vertical-align: middle; }
+        .level-1 { color: #10b981; border-color: #10b981; }
+        .level-2 { color: #fbbf24; border-color: #fbbf24; }
+        .level-3 { color: #f43f5e; border-color: #f43f5e; }
+        .option-label { display: block; padding: 15px; margin: 10px 0; background: #1e293b; border: 2px solid #334155; border-radius: 8px; cursor: pointer; transition: 0.2s; font-size: 1rem; }
+        .option-label:hover { background: #334155; border-color: #38bdf8; }
+        .option-label input { margin-right: 15px; transform: scale(1.2); }
+
+        .teacher-mode { background: linear-gradient(145deg, #451a03, #78350f); border: 1px solid #b45309; padding: 20px; border-radius: 12px; margin-bottom: 25px; display: none; color: #fef3c7; }
+        
+        /* Excel Mockup Style */
+        .excel-table { width: 100%; border-collapse: collapse; margin: 15px 0; background: #ffffff; color: #1e293b; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .excel-table th { background: #107c41; color: white; border: 1px solid #94a3b8; padding: 8px; text-align: center; font-weight: normal; }
+        .excel-table .row-num { background: #e2e8f0; width: 30px; text-align: center; font-weight: bold; border: 1px solid #94a3b8; }
+        .excel-table td { border: 1px solid #94a3b8; padding: 8px; }
+        
+        .formula-bar { display: flex; background: #f1f5f9; padding: 10px; border: 1px solid #94a3b8; border-bottom: none; align-items: center; color: #0f172a;}
+        .formula-input { flex: 1; padding: 8px; border: 1px solid #cbd5e1; outline: none; font-family: monospace; font-size: 1.1rem; margin-left: 10px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="mpi-container">
+        <!-- Header -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+            <button onclick="window.location.href='../index.html'" style="background: rgba(71, 85, 105, 0.3); border: 1px solid #475569; color: #e2e8f0; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.2s;">← Kembali ke Portal</button>
+            <button onclick="toggleTeacherMode()" style="background: transparent; color: #fbbf24; border: 1px dashed #fbbf24; padding: 8px 15px; border-radius: 8px; font-size: 0.9rem; cursor: pointer;">👨‍🏫 Mode Guru</button>
+        </div>
+
+        <div class="teacher-mode" id="teacher-mode">
+            <h3 style="color: #fbbf24; margin-top: 0; display: flex; align-items: center; gap: 10px;"><span>👨‍🏫</span> Catatan Pedagogis untuk Guru</h3>
+            <ul style="font-size: 0.95rem; margin-bottom: 0; padding-left: 20px;">
+                <li style="margin-bottom: 8px;"><strong>Fokus CP:</strong> Siswa mampu menggunakan fungsi pencarian dan referensi tingkat lanjut di aplikasi pengolah angka (Excel/Spreadsheet).</li>
+                <li style="margin-bottom: 8px;"><strong>Aktivitas Kelas:</strong> Gunakan analogi mencari <i>Build Item</i> atau Stat Hero di game untuk menjelaskan VLOOKUP agar siswa tidak alergi duluan dengan rumus.</li>
+                <li><strong>Miskonsepsi Kritis:</strong> Siswa sering lupa perbedaan "V" (Vertical/Kolom turun) dan "H" (Horizontal/Baris ke samping). Tekankan huruf pertamanya.</li>
+            </ul>
+        </div>
+
+        <!-- Tab Navigasi -->
+        <div class="tab-nav">
+            <div class="tab-btn active" onclick="bukaTab(event, 'tab-beranda')">🏠 Beranda</div>
+            <div class="tab-btn" onclick="bukaTab(event, 'tab-teori-1')">📚 VLOOKUP & HLOOKUP</div>
+            <div class="tab-btn" onclick="bukaTab(event, 'tab-teori-2')">🎯 INDEX, MATCH, CHOOSE</div>
+            <div class="tab-btn" onclick="bukaTab(event, 'tab-simulasi')">🎮 Simulasi Rumus</div>
+            <div class="tab-btn" onclick="bukaTab(event, 'tab-kuis')">🏆 Misi Akhir & Absen</div>
+        </div>
+
+        <!-- TAB 1: BERANDA -->
+        <div id="tab-beranda" class="tab-content active">
+            <div style="background: linear-gradient(135deg, #047857, #10b981); padding: 40px 20px; border-radius: 12px; text-align: center; margin-bottom: 30px; box-shadow: inset 0 0 20px rgba(0,0,0,0.2);">
+                <span style="font-size: 4rem; display: block; margin-bottom: 10px;">📊</span>
+                <h1 style="color: white; font-size: 2.8rem; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">Analisis Data Lanjutan</h1>
+                <p style="color: #d1fae5; font-size: 1.2rem; margin-top: 10px;">Kelas 8 | Buku Informatika Revisi | Pengolah Angka</p>
+            </div>
+            
+            <h3 style="color: #e2e8f0; font-size: 1.5rem;">Menjadi "Detektif" Data!</h3>
+            <p style="font-size: 1.1rem; color: #94a3b8;">Pernahkah kamu bertanya bagaimana kasir Indomaret hanya dengan men-scan <i>barcode</i>, nama barang dan harganya langsung muncul di layar? Atau bagaimana game mengetahui stat heromu dari ID pemain? Rahasianya ada di fungsi **Pencarian Data (Lookup)**.</p>
+
+            <div class="card card-success">
+                <h3 style="color: #10b981; margin-top: 0;">🎯 Misi Hari Ini:</h3>
+                <ul style="line-height: 1.8; font-size: 1.05rem;">
+                    <li>✅ Membedakan tabel Vertikal (V) dan Horizontal (H).</li>
+                    <li>✅ Menguasai jurus <strong>VLOOKUP</strong> dan <strong>HLOOKUP</strong>.</li>
+                    <li>✅ Menguasai pelacak canggih: <strong>MATCH</strong> dan <strong>INDEX</strong>.</li>
+                    <li>✅ Menggunakan rumus pilihan ganda: <strong>CHOOSE</strong>.</li>
+                </ul>
+            </div>
+            
+            <div style="text-align: right; margin-top: 30px;">
+                <button onclick="bukaTab(null, 'tab-teori-1')" class="btn-action" style="padding: 15px 30px; font-size: 1.2rem; border-radius: 50px;">Mulai Belajar 🚀</button>
+            </div>
+        </div>
+
+        <!-- TAB 2: VLOOKUP & HLOOKUP -->
+        <div id="tab-teori-1" class="tab-content">
+            <h2 style="color: #38bdf8; font-size: 2rem; border-bottom: 2px solid #334155; padding-bottom: 15px;">📚 Bagian 1: Mesin Pencari Data</h2>
+            
+            <p>Bayangkan kamu punya ribuan data siswa atau data Hero. Akan sangat capek jika mencarinya manual satu per satu. Di sinilah fungsi <strong>LOOKUP</strong> (Melihat/Mencari) bekerja.</p>
+
+            <div class="card" style="border-color: #3b82f6;">
+                <h3 style="color: #3b82f6; margin-top: 0;">⬇️ VLOOKUP (Vertical Lookup)</h3>
+                <p>Digunakan jika bentuk datamu memanjang <strong>ke bawah</strong> (Judul tabel ada di paling atas).</p>
+                <div style="background: #0f172a; padding: 15px; border-radius: 8px; color: #fbbf24; font-family: monospace; font-size: 1.1rem; text-align: center; margin: 15px 0;">
+                    =VLOOKUP( YangDicari, AreaTabel, Kolom_Ke_Berapa, 0 )
+                </div>
+                <ul>
+                    <li><strong>YangDicari:</strong> Kunci pencariannya (Misal: Kode Hero).</li>
+                    <li><strong>AreaTabel:</strong> Seluruh tabel tempat data bersembunyi.</li>
+                    <li><strong>Kolom_Ke_Berapa:</strong> Data yang mau diambil ada di kolom nomor berapa?</li>
+                    <li><strong>0 (False):</strong> Memastikan pencarian harus SAMA PERSIS.</li>
+                </ul>
+            </div>
+
+            <div class="card" style="border-color: #a855f7;">
+                <h3 style="color: #a855f7; margin-top: 0;">➡️ HLOOKUP (Horizontal Lookup)</h3>
+                <p>Digunakan jika bentuk datamu memanjang <strong>ke samping</strong> (Judul tabel ada di paling kiri). Rumusnya sama persis dengan VLOOKUP, bedanya kita menghitung <strong>Baris</strong>, bukan kolom.</p>
+                <div style="background: #0f172a; padding: 15px; border-radius: 8px; color: #fbbf24; font-family: monospace; font-size: 1.1rem; text-align: center; margin: 15px 0;">
+                    =HLOOKUP( YangDicari, AreaTabel, Baris_Ke_Berapa, 0 )
+                </div>
+            </div>
+
+            <div class="card card-alert">
+                <h4 style="color: #ef4444; margin-top: 0;">⚠️ Ingat Aturan Utama!</h4>
+                <p>"YangDicari" (Kata Kunci) <strong>wajib berada di kolom atau baris PERTAMA</strong> dari tabel referensi. Jika kunci pencariannya ada di tengah-tengah tabel, VLOOKUP akan gagal total (Error #N/A).</p>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; margin-top: 40px;">
+                <button onclick="bukaTab(null, 'tab-beranda')" class="btn-action secondary">← Kembali</button>
+                <button onclick="bukaTab(null, 'tab-teori-2')" class="btn-action">Lanjut ke INDEX & MATCH →</button>
+            </div>
+        </div>
+
+        <!-- TAB 3: INDEX, MATCH, CHOOSE -->
+        <div id="tab-teori-2" class="tab-content">
+            <h2 style="color: #38bdf8; font-size: 2rem; border-bottom: 2px solid #334155; padding-bottom: 15px;">🎯 Bagian 2: Jurus Kelas Atas</h2>
+            
+            <p>Karena VLOOKUP punya kelemahan (kata kunci harus selalu di kolom pertama), maka para ahli Excel menciptakan duet maut: <strong>INDEX dan MATCH</strong>.</p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div style="background: #0f172a; padding: 20px; border-radius: 12px; border: 1px solid #334155;">
+                    <h3 style="color: #f59e0b; margin-top: 0;">🔍 MATCH (Mencari Posisi)</h3>
+                    <p>Fungsi MATCH tugasnya hanya satu: memberitahu kamu "Di <strong>urutan ke-berapa</strong> data itu berada?"</p>
+                    <code class="highlight">=MATCH("Grock", A1:A10, 0)</code>
+                    <p style="font-size: 0.9rem; margin-top: 10px; color: #94a3b8;"><i>Hasilnya misalnya: 4 (Artinya Grock ada di urutan ke-4).</i></p>
+                </div>
+                <div style="background: #0f172a; padding: 20px; border-radius: 12px; border: 1px solid #334155;">
+                    <h3 style="color: #10b981; margin-top: 0;">🎯 INDEX (Mengambil Isi)</h3>
+                    <p>Sebaliknya, INDEX bertugas mengambil isi data berdasarkan nomor baris/kolom yang kita sebutkan.</p>
+                    <code class="highlight">=INDEX(B1:B10, 4)</code>
+                    <p style="font-size: 0.9rem; margin-top: 10px; color: #94a3b8;"><i>Mengambil data di list B, yang berada di urutan ke-4.</i></p>
+                </div>
+            </div>
+
+            <div class="card" style="border-color: #ec4899; margin-top: 20px;">
+                <h3 style="color: #ec4899; margin-top: 0;">🎰 CHOOSE (Pilihan Instan)</h3>
+                <p>Rumus ini seperti memilih hadiah di kotak. Kamu memasukkan nomor urut, lalu CHOOSE akan memunculkan nilai dari urutan tersebut.</p>
+                <div class="code-block">=CHOOSE(2, "Emas", "Perak", "Perunggu")</div>
+                <p style="margin-top: 10px;">Karena kita mengetik angka <strong>2</strong> di depan, maka hasil yang keluar adalah <strong>"Perak"</strong>.</p>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; margin-top: 40px;">
+                <button onclick="bukaTab(null, 'tab-teori-1')" class="btn-action secondary">← Kembali</button>
+                <button onclick="bukaTab(null, 'tab-simulasi')" class="btn-action">Masuk ke Lab Praktek →</button>
+            </div>
+        </div>
+
+        <!-- TAB 4: SIMULASI / PRAKTEK -->
+        <div id="tab-simulasi" class="tab-content">
+            <h2 style="color: #38bdf8; border-bottom: 2px solid #334155; padding-bottom: 10px;">🎮 Lab Spreadsheet: VLOOKUP Simulator</h2>
+            <p>Di bawah ini adalah <i>Database Hero</i>. Tugasmu adalah mengambil nama Hero berdasarkan Kode yang diketik di Formula Bar, tepat seperti di Excel asli!</p>
+            
+            <div class="formula-bar">
+                <span style="font-weight: bold; color: #107c41; font-style: italic;">fx</span>
+                <input type="text" id="rumus-input" class="formula-input" placeholder="Ketik rumus =VLOOKUP(...) di sini">
+                <button onclick="cekRumusVlookup()" style="background: #107c41; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px; font-weight: bold;">Enter</button>
+            </div>
+            
+            <!-- Mockup Tabel Excel -->
+            <table class="excel-table">
+                <tr>
+                    <th style="width: 30px;"></th>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>C</th>
+                </tr>
+                <tr>
+                    <td class="row-num">1</td>
+                    <td style="background: #cbd5e1; font-weight: bold;">Kode Hero</td>
+                    <td style="background: #cbd5e1; font-weight: bold;">Nama Hero</td>
+                    <td style="background: #cbd5e1; font-weight: bold;">Role</td>
+                </tr>
+                <tr>
+                    <td class="row-num">2</td>
+                    <td>H01</td>
+                    <td>Tigreal</td>
+                    <td>Tank</td>
+                </tr>
+                <tr>
+                    <td class="row-num">3</td>
+                    <td>H02</td>
+                    <td>Lancelot</td>
+                    <td>Assassin</td>
+                </tr>
+                <tr>
+                    <td class="row-num">4</td>
+                    <td>H03</td>
+                    <td>Layla</td>
+                    <td>Marksman</td>
+                </tr>
+                <tr>
+                    <td class="row-num">5</td>
+                    <td>H04</td>
+                    <td>Kagura</td>
+                    <td>Mage</td>
+                </tr>
+            </table>
+
+            <div style="background: #1e293b; padding: 20px; border-radius: 8px; border: 1px dashed #38bdf8; margin-top: 20px;">
+                <h4 style="margin-top: 0; color: #fbbf24;">Misi Praktek:</h4>
+                <p>Bagaimana rumus yang tepat jika kita ingin mencari **Nama Hero (Kagura)** dengan menggunakan kunci **"H04"**?</p>
+                <p style="font-size: 0.9rem; color: #94a3b8;"><i>Petunjuk: Kuncinya adalah "H04", areanya adalah A2:C5, dan Nama Hero ada di kolom ke-2.</i></p>
+                
+                <div id="hasil-simulasi" style="display: none; background: #047857; color: white; padding: 15px; border-radius: 8px; margin-top: 15px; font-weight: bold; text-align: center;"></div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; margin-top: 40px;">
+                <button onclick="bukaTab(null, 'tab-teori-2')" class="btn-action secondary">← Kembali</button>
+                <button onclick="bukaTab(null, 'tab-kuis')" class="btn-action" style="background: #f59e0b;">Lanjut Ujian Akhir 🏆</button>
+            </div>
+        </div>
+
+        <!-- TAB 5: KUIS & INTEGRASI SPREADSHEET -->
+        <div id="tab-kuis" class="tab-content">
+            <h2 style="color: #f59e0b; text-align: center; font-size: 2.2rem; margin-bottom: 5px;">🏆 Final Boss: Analisis Data</h2>
+            <p style="text-align: center; color: #94a3b8; margin-bottom: 30px;">Kerjakan 4 soal berbasis kasus ini, lalu kirim nilaimu ke server sekolah!</p>
+
+            <div id="quiz-container">
+                <div class="quiz-card" id="q1-box">
+                    <h4>1. Jika data tabel referensimu memanjang ke samping (Horizontal) di mana judul tabel ada di kolom sebelah kiri, fungsi apa yang harus kamu gunakan? <span class="quiz-badge level-1">Pemahaman</span></h4>
+                    <label class="option-label"><input type="radio" name="q1" value="a"> VLOOKUP</label>
+                    <label class="option-label"><input type="radio" name="q1" value="b"> HLOOKUP</label>
+                    <label class="option-label"><input type="radio" name="q1" value="c"> CHOOSE</label>
+                </div>
+
+                <div class="quiz-card" id="q2-box">
+                    <h4>2. Perhatikan rumus ini: <code>=CHOOSE(3, "Senin", "Selasa", "Rabu", "Kamis")</code>. Hasil apa yang akan muncul di layar? <span class="quiz-badge level-1">Pemahaman</span></h4>
+                    <label class="option-label"><input type="radio" name="q2" value="a"> Selasa</label>
+                    <label class="option-label"><input type="radio" name="q2" value="b"> Rabu</label>
+                    <label class="option-label"><input type="radio" name="q2" value="c"> Kamis</label>
+                </div>
+
+                <div class="quiz-card" id="q3-box">
+                    <h4>3. Apa kelemahan utama dari fungsi VLOOKUP yang membuat orang sering beralih menggunakan kombinasi INDEX & MATCH? <span class="quiz-badge level-2">Analisis</span></h4>
+                    <label class="option-label"><input type="radio" name="q3" value="a"> VLOOKUP tidak bisa digunakan untuk menghitung angka.</label>
+                    <label class="option-label"><input type="radio" name="q3" value="b"> VLOOKUP hanya bisa membaca data dari sheet yang sama.</label>
+                    <label class="option-label"><input type="radio" name="q3" value="c"> VLOOKUP hanya bisa mencari data jika kata kuncinya berada di kolom paling pertama (paling kiri) tabel referensi.</label>
+                </div>
+
+                <div class="quiz-card" id="q4-box">
+                    <h4>4. Kamu menggunakan fungsi MATCH untuk mencari nama "Budi" dalam daftar nama absen. Apa output atau hasil yang akan dikeluarkan oleh fungsi MATCH tersebut? <span class="quiz-badge level-3">HOTS</span></h4>
+                    <label class="option-label"><input type="radio" name="q4" value="a"> Nilai ulangan milik Budi.</label>
+                    <label class="option-label"><input type="radio" name="q4" value="b"> Nomor urut (posisi) keberadaan Budi di daftar tersebut.</label>
+                    <label class="option-label"><input type="radio" name="q4" value="c"> Tulisan "TRUE" jika Budi ditemukan.</label>
+                </div>
+
+                <button onclick="prosesKuisLengkap()" class="btn-action" style="width: 100%; padding: 18px; font-size: 1.2rem; background: #3b82f6; margin-bottom: 25px;">Kunci Jawaban 🚀</button>
+                
+                <div id="hasil-box" style="display: none; background: #020617; padding: 30px; border-radius: 12px; border: 2px solid #38bdf8; text-align: center; margin-bottom: 40px; animation: slideUp 0.5s;">
+                    <h2 id="teks-skor" style="font-size: 3rem; margin: 0; color: #10b981;">100</h2>
+                    <p id="teks-evaluasi" style="font-size: 1.2rem; color: #fbbf24; margin-top: 10px; font-weight: bold;"></p>
+                </div>
+            </div>
+
+            <!-- Form Pengiriman Data Terintegrasi (Absen, Dinamis Dropdown) -->
+            <div style="background: #1e293b; padding: 30px; border-radius: 16px; border: 1px solid #475569; position: relative;">
+                <div style="position: absolute; top: -15px; left: 30px; background: #10b981; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.9rem;">Server Integrasi Data</div>
+                
+                <p style="color: #cbd5e1; margin-bottom: 20px; margin-top: 10px;">Lengkapi data di bawah ini untuk mengirim hasil nilaimu.</p>
+
+                <div style="display: grid; grid-template-columns: 80px 1fr; gap: 15px; margin-bottom: 15px;">
+                    <input type="number" id="absen-siswa" placeholder="No" style="width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #475569; background: #0f172a; color: white; box-sizing: border-box; font-size: 1rem;" min="1" max="50">
+                    <input type="text" id="nama-siswa" placeholder="Ketik Nama Lengkap..." style="width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #475569; background: #0f172a; color: white; box-sizing: border-box; font-size: 1rem;">
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                    <select id="tingkat-siswa" onchange="updateDaftarKelas()" style="width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #475569; background: #0f172a; color: white; box-sizing: border-box; font-size: 1rem;">
+                        <option value="">-- Tingkat --</option>
+                        <option value="7">Kelas 7</option>
+                        <option value="8">Kelas 8</option>
+                    </select>
+                    
+                    <select id="kelas-siswa" style="width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #475569; background: #0f172a; color: white; box-sizing: border-box; font-size: 1rem;">
+                        <option value="">-- Pilih Kelas --</option>
+                    </select>
+                </div>
+
+                <label style="display: block; color: #38bdf8; margin-bottom: 10px; font-weight: bold;">Refleksi: Bagian mana yang menurutmu paling sulit?</label>
+                <select id="refleksi-siswa" style="width: 100%; padding: 15px; margin-bottom: 25px; border-radius: 8px; border: 1px solid #475569; background: #0f172a; color: white; box-sizing: border-box; font-size: 1rem;">
+                    <option value="">-- Pilih Kejujuran Hatimu --</option>
+                    <option value="Paham Semua">😁 Mudah! Saya paham VLOOKUP dan fungsi lainnya.</option>
+                    <option value="Bingung Index Match">🤔 Saya masih suka terbalik membedakan INDEX dan MATCH.</option>
+                    <option value="Bingung V H Lookup">😵 Saya masih sering salah antara Vertical dan Horizontal.</option>
+                </select>
+                
+                <button id="btn-selesai" onclick="kirimDatabaseAkhir()" class="btn-action" style="width: 100%; padding: 20px; font-size: 1.2rem; background: linear-gradient(135deg, #10b981, #059669); text-transform: uppercase; letter-spacing: 1px;">Kirim Data ke Server Pak Fajar 📡</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panggil Logika Utama dari app.js (Dropdown Dinamis & Pengirim Data) -->
+    <script src="../assets/js/app.js"></script>
+
+    <script>
+        // 1. Sistem Tab Navigasi Dinamis
+        function bukaTab(evt, tabId) {
+            const contents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < contents.length; i++) contents[i].classList.remove("active");
+            
+            const btns = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < btns.length; i++) btns[i].classList.remove("active");
+            
+            document.getElementById(tabId).classList.add("active");
+            if(evt) { 
+                evt.currentTarget.classList.add("active"); 
+                evt.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            } else {
+                for(let i=0; i<btns.length; i++){
+                    if(btns[i].getAttribute('onclick').includes(tabId)) {
+                        btns[i].classList.add("active");
+                        btns[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    }
+                }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // 2. Togel Mode Guru
+        function toggleTeacherMode() {
+            const tm = document.getElementById('teacher-mode');
+            tm.style.display = (tm.style.display === 'none' || tm.style.display === '') ? 'block' : 'none';
+        }
+
+        // 3. Simulasi Rumus Excel
+        function cekRumusVlookup() {
+            let input = document.getElementById('rumus-input').value.replace(/\s+/g, '').toUpperCase();
+            const hasilBox = document.getElementById('hasil-simulasi');
+            
+            // Validasi rumus yang diharapkan: =VLOOKUP("H04",A2:C5,2,0) atau variasi false
+            if(input.includes('VLOOKUP') && input.includes('H04') && input.includes('2') && (input.includes('0') || input.includes('FALSE'))) {
+                hasilBox.style.display = 'block';
+                hasilBox.style.background = '#10b981';
+                hasilBox.innerHTML = `✅ BENAR! Excel mengembalikan hasil: <strong>Kagura</strong>`;
+            } else if (!input.startsWith('=')) {
+                hasilBox.style.display = 'block';
+                hasilBox.style.background = '#ef4444';
+                hasilBox.innerHTML = `❌ Error: Sebuah rumus Excel harus selalu diawali dengan tanda sama dengan (=).`;
+            } else {
+                hasilBox.style.display = 'block';
+                hasilBox.style.background = '#f59e0b';
+                hasilBox.innerHTML = `⚠️ Rumus kurang tepat. Coba perhatikan lagi urutan parameternya: Kunci, Area, Nomor Kolom, 0.`;
+            }
+        }
+
+        // 4. Mesin Kuis & Evaluasi Lengkap
+        let nilaiAkhirMpi = 0;
+        let kuisTelahDikerjakan = false;
+
+        function prosesKuisLengkap() {
+            let skor = 0;
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+            const q3 = document.querySelector('input[name="q3"]:checked');
+            const q4 = document.querySelector('input[name="q4"]:checked');
+
+            if(!q1 || !q2 || !q3 || !q4) {
+                alert('Tunggu! Ada soal yang belum kamu jawab. Periksa kembali.');
+                return;
+            }
+
+            // Kunci Jawaban: 1(b), 2(b), 3(c), 4(b)
+            const boxes = ['q1-box', 'q2-box', 'q3-box', 'q4-box'];
+            
+            if(q1.value === 'b') { skor += 25; document.getElementById(boxes[0]).style.borderColor = '#10b981'; } 
+            else { document.getElementById(boxes[0]).style.borderColor = '#ef4444'; }
+
+            if(q2.value === 'b') { skor += 25; document.getElementById(boxes[1]).style.borderColor = '#10b981'; } 
+            else { document.getElementById(boxes[1]).style.borderColor = '#ef4444'; }
+
+            if(q3.value === 'c') { skor += 25; document.getElementById(boxes[2]).style.borderColor = '#10b981'; } 
+            else { document.getElementById(boxes[2]).style.borderColor = '#ef4444'; }
+
+            if(q4.value === 'b') { skor += 25; document.getElementById(boxes[3]).style.borderColor = '#10b981'; } 
+            else { document.getElementById(boxes[3]).style.borderColor = '#ef4444'; }
+
+            nilaiAkhirMpi = skor;
+            kuisTelahDikerjakan = true;
+
+            const hasilBox = document.getElementById('hasil-box');
+            const teksSkor = document.getElementById('teks-skor');
+            const teksEval = document.getElementById('teks-evaluasi');
+
+            hasilBox.style.display = 'block';
+            teksSkor.innerText = skor;
+
+            if(skor === 100) {
+                teksSkor.style.color = '#10b981';
+                teksEval.innerText = "🌟 Master Analisis! Kamu siap bekerja dengan Big Data.";
+            } else if (skor >= 75) {
+                teksSkor.style.color = '#fbbf24';
+                teksEval.innerText = "👍 Sangat Baik! Pemahaman logikamu sudah jalan.";
+            } else if (skor >= 50) {
+                teksSkor.style.color = '#f97316';
+                teksEval.innerText = "📚 Cukup Baik. Coba baca ulang lagi bedanya baris dan kolom ya.";
+            } else {
+                teksSkor.style.color = '#ef4444';
+                teksEval.innerText = "💪 Jangan menyerah! Rumus Excel memang butuh pembiasaan. Ulangi pelan-pelan.";
+            }
+        }
+
+        // 5. Router Pengiriman Data ke Google Sheets
+        function kirimDatabaseAkhir() {
+            if(!kuisTelahDikerjakan) {
+                alert('Tolong kerjakan kuisnya dulu agar ada nilai yang bisa dikirim ke server!');
+                return;
+            }
+            
+            const refleksi = document.getElementById('refleksi-siswa').value;
+            if(!refleksi) {
+                alert('Kamu belum memilih perasaan belajarmu di kotak refleksi.');
+                return;
+            }
+
+            // Memanggil API pengirim (dari app.js) dengan judul materi yang tepat
+            kirimDataGanda('Analisis Data: Lookup', nilaiAkhirMpi, refleksi);
+        }
+    </script>
+</body>
+</html>
