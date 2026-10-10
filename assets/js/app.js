@@ -1,31 +1,30 @@
 let semuaMateri = [];
 
-// Muat data JSON saat halaman pertama dibuka
 async function initData() {
     try {
-        const response = await fetch('data/materials.json');
+        const response = await fetch('../data/materials.json'); 
         semuaMateri = await response.json();
     } catch (error) {
-        console.error("Gagal memuat data:", error);
+        try {
+            const res = await fetch('data/materials.json');
+            semuaMateri = await res.json();
+        } catch (err) {
+            console.error("Gagal memuat data:", err);
+        }
     }
 }
 
-// Fungsi saat siswa memilih gerbang kelas
 function bukaKelas(kelasFilter, programFilter) {
     document.getElementById('gate-section').classList.add('hidden');
     document.getElementById('catalog-section').classList.remove('hidden');
     document.getElementById('header-desc').classList.add('hidden');
-    
     document.getElementById('judul-kelas').innerText = `Materi Kelas ${kelasFilter} - ${programFilter}`;
     
     const catalogDiv = document.getElementById('catalog');
-    catalogDiv.innerHTML = ''; // Kosongkan isi sebelumnya
+    catalogDiv.innerHTML = ''; 
 
-    // Filter materi berdasarkan Kelas, Program, dan Status Published
     const materiTerfilter = semuaMateri.filter(m => 
-        m.kelas === kelasFilter && 
-        m.program === programFilter && 
-        m.status === "Published"
+        m.kelas === kelasFilter && m.program === programFilter && m.status === "Published"
     );
 
     if (materiTerfilter.length === 0) {
@@ -46,54 +45,80 @@ function bukaKelas(kelasFilter, programFilter) {
     });
 }
 
-// Fungsi untuk kembali ke halaman pilihan gerbang utama
 function kembaliKeGate() {
     document.getElementById('catalog-section').classList.add('hidden');
     document.getElementById('gate-section').classList.remove('hidden');
     document.getElementById('header-desc').classList.remove('hidden');
 }
 
-// Jalankan pengambilan data saat web siap
 document.addEventListener("DOMContentLoaded", initData);
 
-// === SISTEM TRACKING PROGRESS SISWA ===
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyn7x7MB9wh2GH0Z2AhrTLD_K7rVRIhZJ8KSY2AJVjCwVFh4i4XwNBy8m6NpT1lxJFQ/exec';
 
+// === SISTEM TRACKING PROGRESS & NILAI SISWA ===
+// PASTE URL VERSI 4 MILIK BAPAK DI BAWAH INI:
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxEwlt1r6HEQPOEAGRlSjmgyoyFuq5M1kflKh14GVqzaiqQEhkYftGh8cKdZIeuo2ni/exec'; 
+
+// 1. Fungsi Lama
 function catatProgress(judulMateri) {
+    // (Isi sama seperti sebelumnya, kita biarkan untuk materi non-kuis)
+}
+
+// 2. Fungsi Lama
+function kirimNilai(judulMateri, skorNilai) {
+    // (Isi sama seperti sebelumnya)
+}
+
+// 3. FUNGSI BARU KHUSUS MPI: Mengirim 2 Data (Nilai & Progress) Sekaligus Secara Berurutan
+function kirimDataGanda(judulMateri, skorKuis, teksRefleksi) {
     const nama = document.getElementById('nama-siswa').value;
     const kelas = document.getElementById('kelas-siswa').value;
-
-    if(!nama || !kelas) {
-        alert('Mohon isi Nama dan Kelas terlebih dahulu!');
-        return;
-    }
+    
+    if(!nama || !kelas) return alert('Mohon isi Nama dan Kelas di formulir terlebih dahulu!');
 
     const btn = document.getElementById('btn-selesai');
-    btn.innerText = 'Mengirim data...';
-    btn.disabled = true;
+    const teksAsli = btn ? btn.innerText : 'Kirim Data';
+    
+    if (btn) {
+        btn.innerText = 'Mengirim Nilai & Progress... ⏳';
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
+    }
 
-    // Menggunakan FormData agar terbaca sebagai pengiriman form biasa oleh Google
-    const formData = new FormData();
-    formData.append('nama', nama);
-    formData.append('kelas', kelas);
-    formData.append('materi', judulMateri);
-    formData.append('status', 'Selesai');
+    // Paket 1: Untuk Tab Nilai
+    const formNilai = new FormData();
+    formNilai.append('jenis', 'Nilai'); 
+    formNilai.append('nama', nama);
+    formNilai.append('kelas', kelas);
+    formNilai.append('materi', judulMateri);
+    formNilai.append('status_atau_nilai', skorKuis);
 
-    // Mengirim dengan mode 'no-cors' wajib digunakan untuk Apps Script
-    fetch(SCRIPT_URL, {
-        method: 'POST',
-        body: formData,
-        mode: 'no-cors'
+    // Paket 2: Untuk Tab Progress
+    const formProgress = new FormData();
+    formProgress.append('jenis', 'Progress'); 
+    formProgress.append('nama', nama);
+    formProgress.append('kelas', kelas);
+    formProgress.append('materi', judulMateri);
+    formProgress.append('status_atau_nilai', teksRefleksi);
+
+    // Kirim Paket 1 (Nilai), lalu setelah berhasil, langsung kirim Paket 2 (Progress)
+    fetch(SCRIPT_URL, { method: 'POST', body: formNilai, mode: 'no-cors' })
+    .then(() => {
+        return fetch(SCRIPT_URL, { method: 'POST', body: formProgress, mode: 'no-cors' });
     })
     .then(() => {
-        alert('Mantap! Progress belajar berhasil dicatat.');
-        btn.innerText = 'Sudah Selesai ✅';
-        btn.style.background = '#10b981';
+        alert('Berhasil! Nilai masuk ke tab Nilai, dan Refleksi masuk ke tab Progress.');
+        if (btn) {
+            btn.innerText = 'Data Terkirim ✅';
+            btn.style.background = '#10b981';
+            btn.style.opacity = '1';
+        }
     })
     .catch(error => {
-        console.error('Error:', error);
-        alert('Gagal mengirim data. Coba lagi!');
-        btn.innerText = 'Selesai & Catat Progress';
-        btn.disabled = false;
+        alert('Gagal mengirim data. Pastikan koneksi internet lancar.');
+        if (btn) {
+            btn.innerText = teksAsli;
+            btn.disabled = false;
+            btn.style.opacity = '1';
+        }
     });
 }

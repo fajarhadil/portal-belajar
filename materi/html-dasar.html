@@ -499,7 +499,7 @@
             }
         }
 
-        // 6. Router Pengiriman Data ke Google Sheets (app.js)
+// 6. Router Pengiriman Data ke Google Sheets (app.js)
         function kirimDatabaseAkhir() {
             if(!kuisTelahDikerjakan) {
                 alert('Tolong kerjakan kuisnya dulu agar ada nilai yang bisa dikirim ke server!');
@@ -512,11 +512,9 @@
                 return;
             }
 
-            // Menggabungkan hasil (Contoh: "75 (Cukup Paham)")
-            const payloadData = `${nilaiAkhirMpi} (${refleksi})`;
-            
-            // Panggil API pengirim yang sudah disiapkan di app.js
-            kirimNilai('HTML Dasar Lengkap', payloadData);
+            // Memanggil fungsi pengirim ganda dari app.js
+            // Arg 1: Judul Materi | Arg 2: Angka Nilai | Arg 3: Teks Refleksi
+            kirimDataGanda('HTML Dasar', nilaiAkhirMpi, refleksi);
         }
     </script>
 </body>
